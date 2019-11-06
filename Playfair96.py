@@ -19,18 +19,16 @@ class Grid:
     lines = []
 
     def __init__(self, k=''):
-        self.key = k
-        while len(self.key) > 0:
-            self.nextChar = self.key[0]
-            self.output = self.output + self.nextChar
-            self.key = self.key.replace(self.nextChar, '')
-            self.charactersRemaining = self.charactersRemaining.replace(self.nextChar, '')
-        while len(self.charactersRemaining) > 0:
-            self.nextChar = self.charactersRemaining[0]
-            self.output = self.output + self.nextChar
-            self.key = self.key.replace(self.nextChar, '')
-            self.charactersRemaining = self.charactersRemaining.replace(self.nextChar, '')
+        op = []
+        for nextChar in k:
+            if nextChar not in op:
+                op.append(nextChar)
+        for nextChar in CharacterSet.characterSet:
+            if nextChar not in op:
+                op.append(nextChar)
+        self.output = ''.join(op)
         assert (len(self.output) == self.rows * self.columns)
+
         self.gather_lines()
 
     def gather_lines(self):
